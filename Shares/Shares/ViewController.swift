@@ -25,7 +25,7 @@ class ViewController: UIViewController {
     var profitpr:[Double] = []
     
     var arrayOfShared : [[String :Any ]] = []
-    
+    var arrayOfSharedToDisplay : [[String :Any ]] = []
     override func viewDidLoad() {
         super.viewDidLoad()
         amountValueTextField.layer.cornerRadius = 5.0
@@ -35,6 +35,8 @@ class ViewController: UIViewController {
     }
     
     @IBAction func didTapOnCalculate(_ sender: Any) {
+        self.arrayOfShared = []
+        
         let amount = Double(amountValueTextField.text!)!
         view.endEditing(true)
         totalAmountTextField.text = amountValueTextField.text
@@ -47,13 +49,12 @@ class ViewController: UIViewController {
                 dic["company"] = shares[index]
              
                 arrayOfShared.append(dic)
-//                newsell.append(sell[index])
-//                newbuy.append(element)
-//                newCompany.append(shares[index])
+
                 }
      }
 //    print(newbuy)
 //    print(newsell)
+        self.profit = []
         for (index,element) in arrayOfShared.enumerated(){
             var dic = arrayOfShared[index]
             let sell = dic["sell"] as! Double
@@ -71,15 +72,7 @@ class ViewController: UIViewController {
         print(profit)
         let shortProfites = profit.sorted(by: {$0 > $1});
         print("Short Profites \(shortProfites)")
-        var amt = Double(self.amountValueTextField.text!)!
-        var newProfit = 0.0
-        for profit in shortProfites {
-            if profit < amt {
-                amt = profit
-                newProfit += profit
-            }
-        }
-        
+     
         
         for(index,element) in profit.enumerated() {
             var dic = arrayOfShared[index]
@@ -95,12 +88,18 @@ class ViewController: UIViewController {
 //                max = maxPrecentage
 //            }
 //        }
-        for(_,element) in arrayOfShared.enumerated() {
+        var shorted = arrayOfShared.sorted(by: {$0["profit"] as? Double ?? 0.0 > $1["profit"] as? Double ?? 0.0})
+        print(shorted)
+        self.arrayOfSharedToDisplay = []
+        var amt = Double(self.amountValueTextField.text!)!
+             var newProfit = 0.0
+        for(_,element) in shorted.enumerated() {
             var buy = element["buy"] as? Double ?? 0.0
             var profit = element["profit"] as? Double ?? 0.0
             if buy < amt {
                   amt = amt - buy
                   newProfit += profit
+                self.arrayOfSharedToDisplay.append(element)
             }
         }
         
@@ -111,7 +110,7 @@ class ViewController: UIViewController {
 }
 extension ViewController:UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrayOfShared.count
+        return arrayOfSharedToDisplay.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -119,9 +118,9 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
         let profiet = arrayOfShared[indexPath.row]["profit"] as? Double ?? 0.0
         
         cell.profitLabel.text = "\(profiet.rounded())"
-        cell.sharesLabel.text = "\(arrayOfShared[indexPath.row]["company"] ?? "")"
-        cell.buyLabel.text = "\(arrayOfShared[indexPath.row]["buy"] ?? "")"
-        cell.sellLabel.text = "\(arrayOfShared[indexPath.row]["sell"] ?? "")"
+        cell.sharesLabel.text = "\(arrayOfSharedToDisplay[indexPath.row]["company"] ?? "")"
+        cell.buyLabel.text = "\(arrayOfSharedToDisplay[indexPath.row]["buy"] ?? "")"
+        cell.sellLabel.text = "\(arrayOfSharedToDisplay[indexPath.row]["sell"] ?? "")"
         return cell
     }
     
