@@ -14,6 +14,7 @@
 		7FF313142420D257002511A8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7FF313132420D257002511A8 /* Assets.xcassets */; };
 		7FF313172420D257002511A8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FF313152420D257002511A8 /* LaunchScreen.storyboard */; };
 		7FF3131F2420E105002511A8 /* DataTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF3131E2420E105002511A8 /* DataTableViewCell.swift */; };
+		7FF3132324210CF9002511A8 /* ShareData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FF3132224210CF9002511A8 /* ShareData.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		7FF313162420D257002511A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7FF313182420D257002511A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FF3131E2420E105002511A8 /* DataTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTableViewCell.swift; sourceTree = "<group>"; };
+		7FF3132224210CF9002511A8 /* ShareData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShareData.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				7FF313132420D257002511A8 /* Assets.xcassets */,
 				7FF313152420D257002511A8 /* LaunchScreen.storyboard */,
 				7FF313182420D257002511A8 /* Info.plist */,
+				7FF3132224210CF9002511A8 /* ShareData.swift */,
 			);
 			path = Shares;
 			sourceTree = "<group>";
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7FF3132324210CF9002511A8 /* ShareData.swift in Sources */,
 				7FF3130F2420D252002511A8 /* ViewController.swift in Sources */,
 				7FF3130B2420D252002511A8 /* AppDelegate.swift in Sources */,
 				7FF3130D2420D252002511A8 /* SceneDelegate.swift in Sources */,
