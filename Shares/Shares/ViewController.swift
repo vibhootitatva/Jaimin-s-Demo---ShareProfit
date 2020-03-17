@@ -60,6 +60,7 @@ class ViewController: UIViewController {
             let buy = dic["buy"] as! Double
             if sell - buy > 0{
                 arrayOfShared[index]["profit"] = sell - buy
+                profit.append(sell - buy)
             }
 //            if newsell[index] - newbuy[index] > 0 {
 //                profit.append(newsell[index] - newbuy[index])
@@ -68,6 +69,18 @@ class ViewController: UIViewController {
             
         }
         print(profit)
+        let shortProfites = profit.sorted(by: {$0 > $1});
+        print("Short Profites \(shortProfites)")
+        var amt = Double(self.amountValueTextField.text!)!
+        var newProfit = 0.0
+        for profit in shortProfites {
+            if profit < amt {
+                amt = profit
+                newProfit += profit
+            }
+        }
+        
+        
         for(index,element) in profit.enumerated() {
             var dic = arrayOfShared[index]
             let buyPrice = dic["buy"] as! Double
@@ -82,7 +95,16 @@ class ViewController: UIViewController {
 //                max = maxPrecentage
 //            }
 //        }
+        for(_,element) in arrayOfShared.enumerated() {
+            var buy = element["buy"] as? Double ?? 0.0
+            var profit = element["profit"] as? Double ?? 0.0
+            if buy < amt {
+                  amt = amt - buy
+                  newProfit += profit
+            }
+        }
         
+        self.totalProfitTextField.text = "\(newProfit)"
          tableView.reloadData()
     }
     
@@ -94,8 +116,12 @@ extension ViewController:UITableViewDelegate,UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "DataTableViewCell") as! DataTableViewCell
-        cell.profitLabel.text = "\(arrayOfShared[indexPath.row]["profit"] ?? "")"
+        let profiet = arrayOfShared[indexPath.row]["profit"] as? Double ?? 0.0
         
+        cell.profitLabel.text = "\(profiet.rounded())"
+        cell.sharesLabel.text = "\(arrayOfShared[indexPath.row]["company"] ?? "")"
+        cell.buyLabel.text = "\(arrayOfShared[indexPath.row]["buy"] ?? "")"
+        cell.sellLabel.text = "\(arrayOfShared[indexPath.row]["sell"] ?? "")"
         return cell
     }
     
