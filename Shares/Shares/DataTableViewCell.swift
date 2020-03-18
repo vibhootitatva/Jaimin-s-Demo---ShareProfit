@@ -13,6 +13,7 @@ class DataTableViewCell: UITableViewCell {
     @IBOutlet weak var buyLabel: UILabel!
     @IBOutlet weak var sellLabel: UILabel!
     @IBOutlet weak var profitLabel: UILabel!
+    @IBOutlet weak var profitpercentLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
